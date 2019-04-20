@@ -16,7 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_DONELABS = "donelabs";
     public static final String KEY_DATE = "date";
 
-    public DBHelper(@androidx.annotation.Nullable Context context) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
