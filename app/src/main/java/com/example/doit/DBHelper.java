@@ -15,6 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_ALLLABS = "alllabs";
     public static final String KEY_DONELABS = "donelabs";
     public static final String KEY_DATE = "date";
+    public static final String KEY_TYPE = "type";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -22,7 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_TODO + "(" + KEY_ID + " integer primary key," + KEY_LESSON + " text," + KEY_ALLLABS + " integer," + KEY_DONELABS + " integer," + KEY_DATE + " integer" + ")");
+        db.execSQL("create table " + TABLE_TODO + "(" + KEY_ID + " integer primary key," + KEY_LESSON + " text," + KEY_ALLLABS + " integer," + KEY_DONELABS + " integer," + KEY_DATE + " integer," + KEY_TYPE + " integer" + ")");
     }
 
     @Override
