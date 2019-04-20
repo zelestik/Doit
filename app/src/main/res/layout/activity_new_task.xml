@@ -7,7 +7,7 @@
     tools:context=".NewTaskActivity">
 
     <EditText
-        android:id="@+id/addLesson"
+        android:id="@+id/editLessonAdd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/addLabs"
+        android:id="@+id/editLabsAdd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -29,10 +29,10 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addLesson" />
+        app:layout_constraintTop_toBottomOf="@+id/editLessonAdd" />
 
     <EditText
-        android:id="@+id/addDate"
+        android:id="@+id/editDateAdd"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -41,16 +41,17 @@
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addLabs" />
+        app:layout_constraintTop_toBottomOf="@+id/editLabsAdd" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="@string/add"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addDate" />
+        app:layout_constraintTop_toBottomOf="@+id/editDateAdd" />
+
 </android.support.constraint.ConstraintLayout>
