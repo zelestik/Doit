@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NewTaskActivity extends AppCompatActivity {
 
@@ -26,9 +27,6 @@ public class NewTaskActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View v){
-                //EditText lesson =
-                //EditText labstr =
-                //EditText datestr =
                 String lesson = editLessonAdd.getText().toString();
                 String labstr = editLabsAdd.getText().toString();
                 String datestr = editDateAdd.getText().toString();
@@ -36,12 +34,18 @@ public class NewTaskActivity extends AppCompatActivity {
                 int dateint = Integer.parseInt(datestr);
                 SQLiteDatabase db = dbhelper.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
-                //switch (v.getId()){
-                //case R.id.buAdd:
                 contentValues.put(DBHelper.KEY_LESSON, lesson);
                 contentValues.put(DBHelper.KEY_ALLLABS, labint);
+                contentValues.put(DBHelper.KEY_DONELABS, 0);
                 contentValues.put(DBHelper.KEY_DATE, dateint);
-                //break;
+                contentValues.put(DBHelper.KEY_TYPE, 1);
+                long newRowId = db.insert(DBHelper.TABLE_TODO, null, contentValues);
+                // Если ID  -1, значит произошла ошибка
+                if (newRowId == -1) {
+                    Toast.makeText(getApplicationContext(), "Ошибка " + lesson + dateint + labint, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Успешно", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
