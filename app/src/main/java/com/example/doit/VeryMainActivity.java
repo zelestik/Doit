@@ -105,6 +105,7 @@ public class VeryMainActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
 
         }
+        ftrans.commit();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
