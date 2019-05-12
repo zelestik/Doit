@@ -3,23 +3,37 @@ package com.example.doit;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.app.Fragment;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import com.example.doit.Fragments.AllFragment;
+import com.example.doit.Fragments.TodayFragment;
+import com.example.doit.Fragments.WeekFragment;
+
 public class VeryMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DBHelper dbHelper;
+    TodayFragment tFragment;
+    WeekFragment wFragment;
+    AllFragment aFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
+        //ftrans.replace(R.id.container, tFragment);
+        tFragment = new TodayFragment();
+        wFragment = new WeekFragment();
+        aFragment = new AllFragment();
         setContentView(R.layout.activity_very_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,14 +93,15 @@ public class VeryMainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            ftrans.replace(R.id.container, tFragment);
         } else if (id == R.id.nav_week) {
-
+            ftrans.replace(R.id.container, wFragment);
         } else if (id == R.id.nav_all) {
-
+            ftrans.replace(R.id.container, aFragment);
         } else if (id == R.id.nav_settings) {
 
         }
