@@ -77,7 +77,7 @@ public class TodayFragment extends Fragment {
         return view;
     }
 
-
+/**
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -88,7 +88,7 @@ public class TodayFragment extends Fragment {
                     + " must implement OnListFragmentInteractionListener");
         }
     }
-
+*/
     @Override
     public void onDetach() {
         super.onDetach();
