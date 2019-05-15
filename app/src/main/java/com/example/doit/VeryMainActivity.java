@@ -29,8 +29,6 @@ public class VeryMainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
-        //ftrans.replace(R.id.container, tFragment);
         tFragment = new TodayFragment();
         wFragment = new WeekFragment();
         aFragment = new AllFragment();
@@ -38,6 +36,9 @@ public class VeryMainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+        FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
+        ftrans.replace(R.id.container, tFragment);
+        ftrans.commit();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
