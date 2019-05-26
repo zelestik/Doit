@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.doit.Fragments.TodayFragment;
+
 public class NewTaskActivity extends AppCompatActivity {
 
     private Button button;

@@ -1,9 +1,12 @@
 package com.example.doit;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,10 +18,17 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.example.doit.Fragments.AllFragment;
 import com.example.doit.Fragments.TodayFragment;
 import com.example.doit.Fragments.WeekFragment;
+import com.example.doit.Fragments.dummy.DummyContent;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VeryMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,9 +36,13 @@ public class VeryMainActivity extends AppCompatActivity
     TodayFragment tFragment;
     WeekFragment wFragment;
     AllFragment aFragment;
+    final String LOG_TAG = "myLogs";
+    public static ArrayList<String> lessons = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         tFragment = new TodayFragment();
         wFragment = new WeekFragment();
         aFragment = new AllFragment();
@@ -55,7 +69,27 @@ public class VeryMainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        //DBHelper = new DBHelper(this);
+        dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Log.d(LOG_TAG, "--- Rows in TODO: ---");
+        // делаем запрос всех данных из таблицы TODO, получаем Cursor
+        Cursor c = db.query("TODO", null, null, null, null, null, null);
+
+        // ставим позицию курсора на первую строку выборки
+        // если в выборке нет строк, вернется false
+        if (c.moveToFirst()) {
+
+            // определяем номера столбцов по имени в выборке
+            int idColIndex = c.getColumnIndex("_id");
+            int nameColIndex = c.getColumnIndex("lesson");
+            do {
+                // получаем значения по номерам столбцов и пишем все в лог
+                lessons.add(c.getString(nameColIndex));
+                //Toast.makeText(getApplicationContext(), lessons.get(1), Toast.LENGTH_SHORT).show();
+            } while (c.moveToNext());
+        } else
+            Log.d(LOG_TAG, "0 rows");
+        c.close();
     }
 
     @Override
