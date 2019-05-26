@@ -1,3 +1,5 @@
+package com.example.doit;
+
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -7,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.doit.FinishActivity;
 import com.example.doit.R;
 
 public class Notification extends Activity{
