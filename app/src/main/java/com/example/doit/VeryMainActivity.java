@@ -38,6 +38,8 @@ public class VeryMainActivity extends AppCompatActivity
     AllFragment aFragment;
     final String LOG_TAG = "myLogs";
     public static ArrayList<String> lessons = new ArrayList<String>();
+    public static ArrayList<Integer> alllabs = new ArrayList<Integer>();
+    public static ArrayList<Integer> donelabs = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,17 +75,20 @@ public class VeryMainActivity extends AppCompatActivity
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Log.d(LOG_TAG, "--- Rows in TODO: ---");
         // делаем запрос всех данных из таблицы TODO, получаем Cursor
-        Cursor c = db.query("TODO", null, null, null, null, null, null);
+        Cursor c = db.query("TODO", null, null, null, "date", null, null);
 
         // ставим позицию курсора на первую строку выборки
         // если в выборке нет строк, вернется false
         if (c.moveToFirst()) {
 
             // определяем номера столбцов по имени в выборке
-            int idColIndex = c.getColumnIndex("_id");
+            int allLabsIndex = c.getColumnIndex("alllabs");
+            int doneLabsIndex = c.getColumnIndex("donelabs");
             int nameColIndex = c.getColumnIndex("lesson");
             do {
                 // получаем значения по номерам столбцов и пишем все в лог
+                alllabs.add(c.getInt(allLabsIndex));
+                donelabs.add(c.getInt(doneLabsIndex));
                 lessons.add(c.getString(nameColIndex));
                 //Toast.makeText(getApplicationContext(), lessons.get(1), Toast.LENGTH_SHORT).show();
             } while (c.moveToNext());

@@ -10,4 +10,5 @@
     <string name="menu_all">Всё</string>
     <string name="menu_today">Сегодня</string>
     <string name="menu_week">Неделя</string>
+    <string name="LeftLabs">Осталось сделать</string>
 </resources>
