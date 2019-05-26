@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.doit.VeryMainActivity.lessons;
+
 /**
  * Helper class for providing sample content for user interfaces created by
  * Android template wizards.
@@ -22,8 +24,7 @@ public class DummyContent {
      * A map of sample (dummy) items, by ID.
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
-
-    private static final int COUNT = 25;
+    private static final int COUNT = lessons.size();
 
     static {
         // Add some sample items.
@@ -38,7 +39,7 @@ public class DummyContent {
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new DummyItem(String.valueOf(position), lessons.get(position - 1), makeDetails(position));
     }
 
     private static String makeDetails(int position) {
