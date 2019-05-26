@@ -1,10 +1,14 @@
 package com.example.doit.Fragments.dummy;
 
+import com.example.doit.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.doit.VeryMainActivity.alllabs;
+import static com.example.doit.VeryMainActivity.donelabs;
 import static com.example.doit.VeryMainActivity.lessons;
 
 /**
@@ -14,10 +18,6 @@ import static com.example.doit.VeryMainActivity.lessons;
  * TODO: Replace all uses of this class before publishing your app.
  */
 public class DummyContent {
-
-    /**
-     * An array of sample (dummy) items.
-     */
     public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
 
     /**
@@ -39,7 +39,7 @@ public class DummyContent {
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), lessons.get(position - 1), makeDetails(position));
+        return new DummyItem(String.valueOf(position), lessons.get(position - 1) + "\n" +  "Осталось работ: " + Integer.toString((alllabs.get(position - 1) - donelabs.get(position-1))), makeDetails(position));
     }
 
     private static String makeDetails(int position) {

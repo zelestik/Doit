@@ -18,6 +18,8 @@ import com.example.doit.Fragments.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
+import static com.example.doit.VeryMainActivity.lessons;
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -72,7 +74,9 @@ public class TodayFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyTodayRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            if (lessons.size() != 0) {
+                recyclerView.setAdapter(new MyTodayRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            }
         }
         return view;
     }
