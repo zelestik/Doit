@@ -10,7 +10,11 @@ import com.example.doit.Fragments.TodayFragment.OnListFragmentInteractionListene
 import com.example.doit.Fragments.dummy.DummyContent.DummyItem;
 import com.example.doit.R;
 
+import java.nio.FloatBuffer;
 import java.util.List;
+
+import static com.example.doit.VeryMainActivity.lessons;
+
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
@@ -18,7 +22,6 @@ import java.util.List;
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyTodayRecyclerViewAdapter extends RecyclerView.Adapter<MyTodayRecyclerViewAdapter.ViewHolder> {
-
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
