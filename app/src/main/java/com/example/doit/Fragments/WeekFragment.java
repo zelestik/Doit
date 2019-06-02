@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.doit.R;
-import com.example.doit.Fragments.dummy.DummyContent;
-import com.example.doit.Fragments.dummy.DummyContent.DummyItem;
+import com.example.doit.Fragments.dummy.DummyDone;
+import com.example.doit.Fragments.dummy.DummyDone.DummyItem;
 
 import java.util.List;
 
@@ -70,7 +70,7 @@ public class WeekFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyWeekRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyWeekRecyclerViewAdapter(DummyDone.ITEMS_DONE, mListener));
         }
         return view;
     }

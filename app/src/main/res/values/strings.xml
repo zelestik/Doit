@@ -16,10 +16,10 @@
     <string name="labs_ammount">Ammount of labs</string>
     <string name="add_date">Do until</string>
     <string name="add">Add</string>
-    <string name="menu_today">Today</string>
-    <string name="menu_week">Week</string>
+    <string name="menu_today">Main</string>
+    <string name="menu_week">Done</string>
     <string name="menu_all">All</string>
     <string name="app_name" translatable="false">StuDo</string>
     <string name="LeftLabs">Left to do</string>
-    <string name="buMinus">Done</string>
+    <string name="buMinus" translatable="false">✔</string>
 </resources>
