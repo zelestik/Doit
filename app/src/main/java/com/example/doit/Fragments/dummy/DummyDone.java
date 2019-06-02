@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.doit.VeryMainActivity.alllabs;
-import static com.example.doit.VeryMainActivity.date;
-import static com.example.doit.VeryMainActivity.donelabs;
-import static com.example.doit.VeryMainActivity.lessons;
+import static com.example.doit.VeryMainActivity.alllabs_done;
+import static com.example.doit.VeryMainActivity.date_done;
+import static com.example.doit.VeryMainActivity.donelabs_done;
+import static com.example.doit.VeryMainActivity.lessons_done;
 
 /**
  * Helper class for providing sample content for user interfaces created by
@@ -20,14 +20,14 @@ import static com.example.doit.VeryMainActivity.lessons;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class DummyContent {
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+public class DummyDone {
+    public static final List<DummyItem> ITEMS_DONE = new ArrayList<DummyItem>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
-    private static final int COUNT = lessons.size();
+    public static final Map<String, DummyItem> ITEM_MAP_DONE = new HashMap<String, DummyItem>();
+    private static final int COUNT = lessons_done.size();
 
     static {
         // Add some sample items.
@@ -37,16 +37,14 @@ public class DummyContent {
     }
 
     public static void addItem(DummyItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEMS_DONE.add(item);
+        ITEM_MAP_DONE.put(item.id, item);
     }
 
     public static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), lessons.get(position - 1) + "\n" +  "Осталось работ: " + Integer.toString((alllabs.get(position - 1) - donelabs.get(position-1))) + "\n" + "Сделать до: " + convertDate((date.get(position -1 )), "dd/MM/yyyy"), makeDetails(position));
+        return new DummyItem(String.valueOf(position), lessons_done.get(position - 1) + "\n" +  "Сделано работ: " + Integer.toString((alllabs_done.get(position - 1))), makeDetails(position));
     }
-    private static String convertDate(Long dateInMilliseconds,String dateFormat) {
-        return DateFormat.format(dateFormat, dateInMilliseconds).toString();
-    }
+
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.doit.Fragments.WeekFragment.OnListFragmentInteractionListener;
-import com.example.doit.Fragments.dummy.DummyContent.DummyItem;
+import com.example.doit.Fragments.dummy.DummyDone.DummyItem;
 import com.example.doit.R;
 
 import java.util.List;
@@ -25,6 +25,7 @@ public class MyWeekRecyclerViewAdapter extends RecyclerView.Adapter<MyWeekRecycl
     public MyWeekRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -46,7 +47,6 @@ public class MyWeekRecyclerViewAdapter extends RecyclerView.Adapter<MyWeekRecycl
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
                 }
             }
         });

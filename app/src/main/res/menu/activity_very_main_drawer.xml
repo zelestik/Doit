@@ -10,12 +10,6 @@
         <item
             android:id="@+id/nav_week"
             android:title="@string/menu_week" />
-        <item
-            android:id="@+id/nav_all"
-            android:title="@string/menu_all" />
-        <item
-            android:id="@+id/nav_settings"
-            android:title="@string/menu_settings" />
     </group>
 
 </menu>

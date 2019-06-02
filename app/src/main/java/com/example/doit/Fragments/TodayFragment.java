@@ -32,6 +32,7 @@ import static com.example.doit.VeryMainActivity.lessons;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
+
 public class TodayFragment extends Fragment {
     // TODO: Customize parameter argument names
 
@@ -39,7 +40,6 @@ public class TodayFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the

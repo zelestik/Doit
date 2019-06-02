@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,11 +40,17 @@ import static com.example.doit.DBHelper.TABLE_TODO;
 import static com.example.doit.Fragments.dummy.DummyContent.ITEMS;
 import static com.example.doit.Fragments.dummy.DummyContent.addItem;
 import static com.example.doit.Fragments.dummy.DummyContent.createDummyItem;
+import static com.example.doit.Fragments.dummy.DummyDone.ITEMS_DONE;
 import static com.example.doit.VeryMainActivity.alllabs;
+import static com.example.doit.VeryMainActivity.alllabs_done;
 import static com.example.doit.VeryMainActivity.date;
+import static com.example.doit.VeryMainActivity.date_done;
 import static com.example.doit.VeryMainActivity.donelabs;
+import static com.example.doit.VeryMainActivity.donelabs_done;
+import static com.example.doit.VeryMainActivity.id_done;
 import static com.example.doit.VeryMainActivity.lessons;
 import static com.example.doit.VeryMainActivity.id;
+import static com.example.doit.VeryMainActivity.lessons_done;
 
 
 /**
@@ -60,6 +67,7 @@ public class MyTodayRecyclerViewAdapter extends RecyclerView.Adapter<MyTodayRecy
     public MyTodayRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
+        notifyDataSetChanged();
 
     }
 
@@ -104,6 +112,11 @@ public class MyTodayRecyclerViewAdapter extends RecyclerView.Adapter<MyTodayRecy
                 long newRowId = db.update(TABLE_TODO, updatedValues, where, null);
                 ITEMS.clear();
                 if (alllabs.get(position) <= donelabs.get(position)) {
+                    lessons_done.add(lessons.get(position));
+                    alllabs_done.add(alllabs.get(position));
+                    donelabs_done.add(donelabs.get(position));
+                    date_done.add(date.get(position));
+                    id_done.add(id.get(position));
                     lessons.remove(position);
                     alllabs.remove(position);
                     donelabs.remove(position);

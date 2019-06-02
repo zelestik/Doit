@@ -51,6 +51,11 @@ public class VeryMainActivity extends AppCompatActivity implements NavigationVie
     public static ArrayList<Integer> donelabs = new ArrayList<Integer>();
     public static ArrayList<Long> date = new ArrayList<>();
     public static ArrayList<Integer> id = new ArrayList<>();
+    public static ArrayList<String> lessons_done = new ArrayList<String>();
+    public static ArrayList<Integer> alllabs_done = new ArrayList<Integer>();
+    public static ArrayList<Integer> donelabs_done = new ArrayList<Integer>();
+    public static ArrayList<Long> date_done = new ArrayList<>();
+    public static ArrayList<Integer> id_done = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +109,14 @@ public class VeryMainActivity extends AppCompatActivity implements NavigationVie
                     date.add(c.getLong(dateColIndex));
                     id.add(c.getInt(idColIndex));
                 }
+                else {
+                    // получаем значения по номерам столбцов и пишем все в лог
+                    alllabs_done.add(c.getInt(allLabsIndex));
+                    donelabs_done.add(c.getInt(doneLabsIndex));
+                    lessons_done.add(c.getString(nameColIndex));
+                    date_done.add(c.getLong(dateColIndex));
+                    id_done.add(c.getInt(idColIndex));
+                }
             } while (c.moveToNext());
         } else
             Log.d(LOG_TAG, "0 rows");
@@ -135,9 +148,6 @@ public class VeryMainActivity extends AppCompatActivity implements NavigationVie
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -153,13 +163,8 @@ public class VeryMainActivity extends AppCompatActivity implements NavigationVie
             ftrans.replace(R.id.container, tFragment);
         } else if (id == R.id.nav_week) {
             ftrans.replace(R.id.container, wFragment);
-        } else if (id == R.id.nav_all) {
-            ftrans.replace(R.id.container, aFragment);
-        } else if (id == R.id.nav_settings) {
-
         }
         ftrans.commit();
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
