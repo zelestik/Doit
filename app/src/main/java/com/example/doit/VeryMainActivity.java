@@ -1,8 +1,10 @@
 package com.example.doit;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
@@ -30,9 +32,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VeryMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-    DBHelper dbHelper;
+import static com.example.doit.DBHelper.KEY_ALLLABS;
+import static com.example.doit.DBHelper.KEY_DATE;
+import static com.example.doit.DBHelper.KEY_DONELABS;
+import static com.example.doit.DBHelper.KEY_ID;
+import static com.example.doit.DBHelper.KEY_LESSON;
+import static com.example.doit.DBHelper.KEY_TYPE;
+import static com.example.doit.NewTaskActivity.dbhelper;
+
+public class VeryMainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    static DBHelper dbHelper;
     TodayFragment tFragment;
     WeekFragment wFragment;
     AllFragment aFragment;
@@ -40,11 +49,12 @@ public class VeryMainActivity extends AppCompatActivity
     public static ArrayList<String> lessons = new ArrayList<String>();
     public static ArrayList<Integer> alllabs = new ArrayList<Integer>();
     public static ArrayList<Integer> donelabs = new ArrayList<Integer>();
+    public static ArrayList<Long> date = new ArrayList<>();
+    public static ArrayList<Integer> id = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         tFragment = new TodayFragment();
         wFragment = new WeekFragment();
         aFragment = new AllFragment();
@@ -85,12 +95,17 @@ public class VeryMainActivity extends AppCompatActivity
             int allLabsIndex = c.getColumnIndex("alllabs");
             int doneLabsIndex = c.getColumnIndex("donelabs");
             int nameColIndex = c.getColumnIndex("lesson");
+            int dateColIndex = c.getColumnIndex("date");
+            int idColIndex = c.getColumnIndex(KEY_ID);
             do {
-                // получаем значения по номерам столбцов и пишем все в лог
-                alllabs.add(c.getInt(allLabsIndex));
-                donelabs.add(c.getInt(doneLabsIndex));
-                lessons.add(c.getString(nameColIndex));
-                //Toast.makeText(getApplicationContext(), lessons.get(1), Toast.LENGTH_SHORT).show();
+                if (c.getInt(allLabsIndex) > c.getInt(doneLabsIndex)) {
+                    // получаем значения по номерам столбцов и пишем все в лог
+                    alllabs.add(c.getInt(allLabsIndex));
+                    donelabs.add(c.getInt(doneLabsIndex));
+                    lessons.add(c.getString(nameColIndex));
+                    date.add(c.getLong(dateColIndex));
+                    id.add(c.getInt(idColIndex));
+                }
             } while (c.moveToNext());
         } else
             Log.d(LOG_TAG, "0 rows");
@@ -150,5 +165,11 @@ public class VeryMainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void addToDB(int position){
+
+    }
+
+    public static void onButtonPress (int position) {
     }
 }
