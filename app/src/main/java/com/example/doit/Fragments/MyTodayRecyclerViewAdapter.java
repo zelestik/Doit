@@ -36,6 +36,9 @@ import static com.example.doit.DBHelper.KEY_ID;
 import static com.example.doit.DBHelper.KEY_LESSON;
 import static com.example.doit.DBHelper.KEY_TYPE;
 import static com.example.doit.DBHelper.TABLE_TODO;
+import static com.example.doit.Fragments.dummy.DummyContent.ITEMS;
+import static com.example.doit.Fragments.dummy.DummyContent.addItem;
+import static com.example.doit.Fragments.dummy.DummyContent.createDummyItem;
 import static com.example.doit.VeryMainActivity.alllabs;
 import static com.example.doit.VeryMainActivity.date;
 import static com.example.doit.VeryMainActivity.donelabs;
@@ -99,7 +102,17 @@ public class MyTodayRecyclerViewAdapter extends RecyclerView.Adapter<MyTodayRecy
                 String where = KEY_ID + "=" + Integer.toString(id.get(position));
                 // Обновите строку с указанным индексом, используя новые значения.
                 long newRowId = db.update(TABLE_TODO, updatedValues, where, null);
-                new TodayFragment();
+                ITEMS.clear();
+                if (alllabs.get(position) <= donelabs.get(position)) {
+                    lessons.remove(position);
+                    alllabs.remove(position);
+                    donelabs.remove(position);
+                    date.remove(position);
+                    id.remove(position);
+                }
+                for (int i = 1; i <= lessons.size(); i++) {
+                    addItem(createDummyItem(i));
+                    }
                 notifyDataSetChanged();
             }
         });
