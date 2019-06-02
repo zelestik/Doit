@@ -1,5 +1,7 @@
 package com.example.doit.Fragments.dummy;
 
+import android.text.format.DateFormat;
+
 import com.example.doit.R;
 
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.example.doit.VeryMainActivity.alllabs;
+import static com.example.doit.VeryMainActivity.date;
 import static com.example.doit.VeryMainActivity.donelabs;
 import static com.example.doit.VeryMainActivity.lessons;
 
@@ -33,13 +36,17 @@ public class DummyContent {
         }
     }
 
-    private static void addItem(DummyItem item) {
+    public static void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), lessons.get(position - 1) + "\n" +  "Осталось работ: " + Integer.toString((alllabs.get(position - 1) - donelabs.get(position-1))), makeDetails(position));
+    public static DummyItem createDummyItem(int position) {
+        return new DummyItem(String.valueOf(position), lessons.get(position - 1) + "\n" +  "Осталось работ: " + Integer.toString((alllabs.get(position - 1) - donelabs.get(position-1))) + "\n" + "Сделать до: " + convertDate((date.get(position -1 )), "dd/MM/yyyy"), makeDetails(position));
+    }
+
+    private static String convertDate(Long dateInMilliseconds,String dateFormat) {
+        return DateFormat.format(dateFormat, dateInMilliseconds).toString();
     }
 
     private static String makeDetails(int position) {

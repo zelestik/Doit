@@ -83,8 +83,6 @@ public class VeryMainActivity extends AppCompatActivity implements NavigationVie
         navigationView.setNavigationItemSelectedListener(this);
         dbHelper = new DBHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Log.d(LOG_TAG, "--- Rows in TODO: ---");
-        // делаем запрос всех данных из таблицы TODO, получаем Cursor
         Cursor c = db.query("TODO", null, null, null, "date", null, null);
 
         // ставим позицию курсора на первую строку выборки
