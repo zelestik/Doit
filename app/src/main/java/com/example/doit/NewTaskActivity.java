@@ -16,13 +16,12 @@ public class NewTaskActivity extends AppCompatActivity {
 
     private Button button;
     private EditText editLessonAdd, editLabsAdd, editDateAdd;
-    DBHelper dbhelper;
+    static DBHelper dbhelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
-        dbhelper = new DBHelper(NewTaskActivity.this);
         editLessonAdd = findViewById(R.id.editLessonAdd);
         editLabsAdd = findViewById(R.id.editLabsAdd);
         final CalendarView calendarView = (CalendarView) findViewById(R.id.calendarView);
@@ -30,10 +29,10 @@ public class NewTaskActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View v){
+                dbhelper = new DBHelper(NewTaskActivity.this);
                 long dateint = calendarView.getDate();
                 String lesson = editLessonAdd.getText().toString();
                 String labstr = editLabsAdd.getText().toString();
-                //String datestr = editDateAdd.getText().toString();
                 int labint = Integer.parseInt(labstr);
                 SQLiteDatabase db = dbhelper.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();

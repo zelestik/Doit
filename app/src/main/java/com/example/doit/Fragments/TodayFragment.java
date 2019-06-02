@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,13 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
+import com.example.doit.DBHelper;
 import com.example.doit.R;
 import com.example.doit.Fragments.dummy.DummyContent;
 import com.example.doit.Fragments.dummy.DummyContent.DummyItem;
 
+
 import java.util.List;
 
+import static com.example.doit.VeryMainActivity.donelabs;
 import static com.example.doit.VeryMainActivity.lessons;
 
 /**
@@ -27,12 +33,13 @@ import static com.example.doit.VeryMainActivity.lessons;
  * interface.
  */
 public class TodayFragment extends Fragment {
-
     // TODO: Customize parameter argument names
+
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -78,6 +85,7 @@ public class TodayFragment extends Fragment {
                 recyclerView.setAdapter(new MyTodayRecyclerViewAdapter(DummyContent.ITEMS, mListener));
             }
         }
+
         return view;
     }
 
@@ -99,6 +107,7 @@ public class TodayFragment extends Fragment {
         mListener = null;
     }
 
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -110,7 +119,8 @@ public class TodayFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);
     }
+
+
 }
