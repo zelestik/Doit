@@ -1,5 +1,6 @@
 package com.example.doit;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -23,6 +24,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.example.doit.Fragments.AllFragment;
+import com.example.doit.Fragments.MyTodayRecyclerViewAdapter;
 import com.example.doit.Fragments.TodayFragment;
 import com.example.doit.Fragments.WeekFragment;
 import com.example.doit.Fragments.dummy.DummyContent;
@@ -74,11 +76,12 @@ public class VeryMainActivity extends AppCompatActivity implements NavigationVie
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(VeryMainActivity.this, NewTaskActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        //.setAction("Action", null).show();
+                //.setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -122,7 +125,21 @@ public class VeryMainActivity extends AppCompatActivity implements NavigationVie
             Log.d(LOG_TAG, "0 rows");
         c.close();
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // запишем в лог значения requestCode и resultCode
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("myLogs", "requestCode = " + requestCode + ", resultCode = " + resultCode);
+        // если пришло ОК
+        if (resultCode == RESULT_OK) {
+            FragmentTransaction ftrans = getSupportFragmentManager().beginTransaction();
+            ftrans.detach(tFragment);
+            ftrans.attach(tFragment);
+            ftrans.commit();
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        }
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -163,16 +180,15 @@ public class VeryMainActivity extends AppCompatActivity implements NavigationVie
             ftrans.replace(R.id.container, tFragment);
         } else if (id == R.id.nav_week) {
             ftrans.replace(R.id.container, wFragment);
+            ftrans.detach(wFragment);
+            ftrans.attach(wFragment);
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
         }
         ftrans.commit();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void addToDB(int position){
 
-    }
-
-    public static void onButtonPress (int position) {
-    }
 }
