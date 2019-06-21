@@ -1,8 +1,10 @@
 package com.example.doit;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -85,6 +87,9 @@ public class NewTaskActivity extends AppCompatActivity  {
                             for (int i = 1; i <= lessons.size(); i++) {
                                 addItem(createDummyItem(i));
                             }
+                            Intent intent = new Intent();
+                            setResult(Activity.RESULT_OK, intent);
+                            finish();
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "Количество работ должно быть больше 0", Toast.LENGTH_SHORT).show();

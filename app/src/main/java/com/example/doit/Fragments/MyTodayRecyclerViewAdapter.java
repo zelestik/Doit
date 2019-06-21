@@ -21,6 +21,7 @@ import com.example.doit.DBHelper;
 import com.example.doit.Fragments.TodayFragment.OnListFragmentInteractionListener;
 import com.example.doit.Fragments.dummy.DummyContent;
 import com.example.doit.Fragments.dummy.DummyContent.DummyItem;
+import com.example.doit.Fragments.dummy.DummyDone;
 import com.example.doit.NewTaskActivity;
 import com.example.doit.R;
 import com.example.doit.VeryMainActivity;
@@ -39,7 +40,9 @@ import static com.example.doit.DBHelper.KEY_TYPE;
 import static com.example.doit.DBHelper.TABLE_TODO;
 import static com.example.doit.Fragments.dummy.DummyContent.ITEMS;
 import static com.example.doit.Fragments.dummy.DummyContent.addItem;
-import static com.example.doit.Fragments.dummy.DummyContent.createDummyItem;
+import static com.example.doit.Fragments.dummy.DummyDone.addItem;
+//import static com.example.doit.Fragments.dummy.DummyContent.createDummyItem;
+//import static com.example.doit.Fragments.dummy.DummyDone.createDummyItem;
 import static com.example.doit.Fragments.dummy.DummyDone.ITEMS_DONE;
 import static com.example.doit.VeryMainActivity.alllabs;
 import static com.example.doit.VeryMainActivity.alllabs_done;
@@ -111,6 +114,7 @@ public class MyTodayRecyclerViewAdapter extends RecyclerView.Adapter<MyTodayRecy
                 // Обновите строку с указанным индексом, используя новые значения.
                 long newRowId = db.update(TABLE_TODO, updatedValues, where, null);
                 ITEMS.clear();
+                ITEMS_DONE.clear();
                 if (alllabs.get(position) <= donelabs.get(position)) {
                     lessons_done.add(lessons.get(position));
                     alllabs_done.add(alllabs.get(position));
@@ -124,8 +128,11 @@ public class MyTodayRecyclerViewAdapter extends RecyclerView.Adapter<MyTodayRecy
                     id.remove(position);
                 }
                 for (int i = 1; i <= lessons.size(); i++) {
-                    addItem(createDummyItem(i));
-                    }
+                    DummyContent.addItem(DummyContent.createDummyItem(i));
+                }
+                for (int i = 1; i <= lessons_done.size(); i++){
+                    DummyDone.addItem(DummyDone.createDummyItem(i));
+                }
                 notifyDataSetChanged();
             }
         });
